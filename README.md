@@ -1,6 +1,8 @@
 
 # ClientPulse
 
+[![CI](https://github.com/Helenyixuanwang/client-pulse/actions/workflows/ci.yml/badge.svg)](https://github.com/Helenyixuanwang/client-pulse/actions/workflows/ci.yml)
+
 A full-stack client project tracker built to demonstrate production-ready development with the modern React/Supabase stack.
 
 ## Live Demo
@@ -25,7 +27,12 @@ A full-stack client project tracker built to demonstrate production-ready develo
 | Database | Supabase PostgreSQL with RLS |
 | Client | Supabase JS (fully typed with generated types) |
 | Deployment | Vercel |
+| CI/CD | GitHub Actions + Vercel auto-deploy |
 
+## CI/CD Pipeline
+git push origin main
+→ GitHub Actions: type check (tsc) + build
+→ if passing → Vercel auto-deploys to production
 ## Getting Started
 
 ```bash
@@ -74,4 +81,3 @@ src/
 │   └── server.ts         # Server Supabase client (cookie-based)
 └── types/
 └── database.types.ts # Auto-generated Supabase types
-# CI/CD Test
