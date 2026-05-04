@@ -63,6 +63,8 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 All tables protected by Supabase Row Level Security policies.
 
 ## Project Structure
+
+```
 src/
 ├── app/
 │   ├── auth/callback/        # Supabase auth callback handler
@@ -76,8 +78,9 @@ src/
 │   ├── TaskList.tsx          # Client component for tasks
 │   └── FeedbackList.tsx      # Client component for feedback
 └── lib/
-├── supabase/
-│   ├── client.ts         # Browser Supabase client
-│   └── server.ts         # Server Supabase client (cookie-based)
-└── types/
-└── database.types.ts # Auto-generated Supabase types
+    ├── supabase/
+    │   ├── client.ts         # Browser Supabase client
+    │   └── server.ts         # Server Supabase client (cookie-based)
+    └── types/
+        └── database.types.ts # Auto-generated Supabase types
+```
