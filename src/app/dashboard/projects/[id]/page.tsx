@@ -19,7 +19,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
 
   if (!project) notFound();
 
-  const { data: tasks } = await supabase
+  const { data: rawTasks } = await supabase
     .from("tasks")
     .select("*")
     .eq("project_id", id)
@@ -30,6 +30,11 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
     .select("*")
     .eq("project_id", id)
     .order("upvotes", { ascending: false });
+
+  const tasks = (rawTasks ?? []).map((t) => ({
+    ...t,
+    status: t.status as "todo" | "in-progress" | "done",
+  }));
 
   return (
     <div className="min-h-screen bg-zinc-950 text-white">
@@ -43,7 +48,6 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
       </nav>
 
       <main className="max-w-5xl mx-auto px-6 py-10">
-        {/* Project header */}
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-1">
             <h1 className="text-2xl font-bold">{project.name}</h1>
@@ -63,7 +67,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <TaskList projectId={id} initialTasks={tasks ?? []} />
+          <TaskList projectId={id} initialTasks={tasks} />
           <FeedbackList projectId={id} initialFeedback={feedback ?? []} />
         </div>
       </main>

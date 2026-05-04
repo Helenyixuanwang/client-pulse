@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
 
 type Task = {
   id: string;
@@ -22,7 +21,6 @@ export default function TaskList({
   const [tasks, setTasks] = useState<Task[]>(initialTasks);
   const [title, setTitle] = useState("");
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   const addTask = async () => {
     if (!title.trim()) return;
@@ -35,7 +33,7 @@ export default function TaskList({
       .single();
 
     if (!error && data) {
-      setTasks([data, ...tasks]);
+      setTasks([{ ...data, status: data.status as Task["status"] }, ...tasks]);
       setTitle("");
     }
     setLoading(false);
@@ -57,7 +55,6 @@ export default function TaskList({
     <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-5">
       <h2 className="text-lg font-semibold mb-4">Tasks</h2>
 
-      {/* Add task */}
       <div className="flex gap-2 mb-5">
         <input
           type="text"
@@ -76,7 +73,6 @@ export default function TaskList({
         </button>
       </div>
 
-      {/* Task list */}
       {tasks.length === 0 ? (
         <p className="text-sm text-zinc-500 text-center py-4">No tasks yet</p>
       ) : (
