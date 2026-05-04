@@ -74,3 +74,4 @@ src/
 │   └── server.ts         # Server Supabase client (cookie-based)
 └── types/
 └── database.types.ts # Auto-generated Supabase types
+# CI/CD Test
